@@ -1,0 +1,37 @@
+class MyStack
+{
+    int top;
+	int arr[] = new int[1000];
+
+    MyStack()
+	{
+		top = -1;
+	}
+	
+	
+    void push(int a)
+	{
+	    
+	  top += 1; 
+
+		arr[top] = a;
+	        
+	    
+	    
+
+	} 
+	
+
+	int pop()
+	{
+	    if (top == -1)  
+		    return -1;
+		else 
+		{
+		    int to_return = arr[top]; 
+		    top -= 1;  
+		    return to_return; 
+		}
+        
+	}
+}
