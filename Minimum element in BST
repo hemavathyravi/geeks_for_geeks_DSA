@@ -1,0 +1,16 @@
+class Solution {
+
+    int minValue(Node root) {
+        
+        Node temp=root;
+        
+        while(temp.left!=null)
+        {
+            
+            temp=temp.left;
+            
+        }
+        int min=temp.data;
+        return min;
+    }
+}
