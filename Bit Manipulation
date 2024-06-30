@@ -1,0 +1,22 @@
+class Solution {
+    static void bitManipulation(int num, int i) {
+        int v= (1<<(i-1))&num,getbit,clearbit;
+        if(v==0)
+        {
+            getbit=0;
+            clearbit=(~(1<<(i-1)))&num;
+        }
+        else
+        {
+            getbit=1;
+            
+            clearbit=(1<<(i-1))^num;
+        }
+        
+        
+        
+        int setbit =  (1<<(i-1))|num;
+        
+        System.out.print(getbit+" "+setbit+" "+clearbit);
+    }
+}
