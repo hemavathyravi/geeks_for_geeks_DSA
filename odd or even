@@ -1,0 +1,9 @@
+class Solution{
+    static String oddEven(int N){
+        int v=N&1;
+        if(v==1)
+        return "odd";
+        
+        return "even";
+    }
+}
