@@ -1,0 +1,32 @@
+class Solution {
+    public int rowWithMax1s(int arr[][]) {
+        int maxCount = 0, maxRowIndex = -1;
+        int rowCount = arr.length, colCount = arr[0].length;
+        
+        for (int i = 0; i < rowCount; i++) {
+            int count = countOnes(arr[i], colCount);
+            if (count > maxCount) {
+                maxCount = count;
+                maxRowIndex = i;
+            }
+        }
+        
+        return maxRowIndex;
+    }
+    
+    public int countOnes(int row[], int colCount) {
+        int low = 0, high = colCount - 1;
+        
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (row[mid] == 1) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        
+        // All elements from `low` to `colCount-1` are 1's
+        return colCount - low;
+    }
+}
