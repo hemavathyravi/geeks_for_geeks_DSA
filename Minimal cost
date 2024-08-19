@@ -1,0 +1,33 @@
+class Solution {
+    public int minimizeCost(int arr[], int k) {
+        // code here
+        int[] store = new int[arr.length];
+        int n=arr.length-1;
+        for(int i=0;i<store.length;i++)
+        {
+            store[i]=-1;
+        }
+        return f(arr,k,n,store);
+        
+    }
+    public int f(int arr[],int k,int n,int[] dp)
+    {
+        if(n==0)
+        {
+            return 0;
+        }
+        int min=Integer.MAX_VALUE;
+        if(dp[n]!=-1)
+        return dp[n];
+        for(int i=1;i<=k;i++)
+        {
+            if(n-i>=0)
+            {
+            int jmp=f(arr,k,n-i,dp)+Math.abs(arr[n]-arr[n-i]);
+            min=Math.min(min,jmp);
+            }
+        }
+        dp[n]=min;
+        return min;
+    }
+}
