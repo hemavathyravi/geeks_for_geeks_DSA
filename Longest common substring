@@ -1,0 +1,35 @@
+class Solution {
+    public int longestCommonSubstr(String str1, String str2) {
+        // code here
+        int[][] lcs = new int[str1.length()+1][str2.length()+1];
+        int max=0;
+        
+        for(int i=1;i<lcs.length;i++)
+        {
+            for(int j=1;j<lcs[0].length;j++)
+            {
+                
+                    if(str1.charAt(i-1)==str2.charAt(j-1))
+                    {
+                        lcs[i][j]=lcs[i-1][j-1]+1;
+                        if(max<lcs[i][j])
+                        {
+                            max= lcs[i][j];
+                        }
+                
+                    }
+                    else
+                    {
+                        lcs[i][j]=0;
+                    }
+                
+                
+            }
+            
+        }
+        
+        
+        
+        return max;
+    }
+}
