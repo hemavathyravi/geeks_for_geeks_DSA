@@ -1,0 +1,24 @@
+class Solution {
+    static String postToInfix(String exp) {
+        // code here
+        Stack<String> st = new Stack<>();
+        int i=0;
+        
+        while(i<exp.length())
+        {
+            if((exp.charAt(i)>='A'&&exp.charAt(i)<='Z')||(exp.charAt(i)>='a'&&exp.charAt(i)<='z')||(exp.charAt(i)>='0'&&exp.charAt(i)<='9'))
+            {
+                st.push(String.valueOf(exp.charAt(i)));
+            }
+            else
+            {
+                String t1=st.pop();
+                String t2=st.pop();
+                String s = "("+t2+exp.charAt(i)+t1+")";
+                st.push(s);
+            }
+            i++;
+        }
+        return st.pop();
+    }
+}
