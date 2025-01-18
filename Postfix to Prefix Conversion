@@ -1,0 +1,22 @@
+class Solution {
+    static String postToPre(String post_exp) {
+        // code here
+        int i=0;
+        Stack<String> st = new Stack<>();
+        while(i<post_exp.length())
+        {
+            if(Character.isLetterOrDigit(post_exp.charAt(i))){
+                st.push(String.valueOf(post_exp.charAt(i)));
+            }
+            else{
+                String t1=st.pop();
+                String t2=st.pop();
+                String s= String.valueOf(post_exp.charAt(i))+t2+t1;
+                st.push(s);
+            }
+            i++;
+        }
+        return st.pop();
+        
+    }
+}
