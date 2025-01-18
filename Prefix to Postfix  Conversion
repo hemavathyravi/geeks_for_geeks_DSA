@@ -1,0 +1,21 @@
+class Solution {
+    static String preToPost(String pre_exp) {
+        // code here
+        int i=pre_exp.length()-1;
+        Stack<String> st = new Stack<>();
+        while(i>=0)
+        {
+            if(Character.isLetterOrDigit(pre_exp.charAt(i))){
+                st.push(String.valueOf(pre_exp.charAt(i)));
+            }
+            else{
+                String t1=st.pop();
+                String t2=st.pop();
+                String s= t1+t2+String.valueOf(pre_exp.charAt(i));
+                st.push(s);
+            }
+            i--;
+        }
+        return st.pop();
+    }
+}
