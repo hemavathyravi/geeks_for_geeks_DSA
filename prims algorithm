@@ -1,0 +1,57 @@
+class Solution {
+    static int spanningTree(int V, int E, List<List<int[]>> adj) {
+        
+        PriorityQueue<Pair> q = new PriorityQueue<Pair>((x,y) -> x.second - y.second);
+        int sum=0;
+        int[] vis = new int[V];
+        Arrays.fill(vis,0);
+        ArrayList<ArrayList<Pair>> adja = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            adja.add(new ArrayList<Pair>());
+        }
+        for(int i=0;i<adj.size();i++){
+            for (int[] edge : adj.get(i)) {
+                int v = edge[0];
+                int weight = edge[1];
+                adja.get(i).add(new Pair(v, weight));
+            }
+        }
+        
+        q.add(new Pair(0,0));
+        while(q.size()!=0){
+            int node= q.peek().first;
+            int dis = q.peek().second;
+            q.poll();
+            
+            if(vis[node]==1){
+                continue;
+            }
+            
+            vis[node]=1;
+            sum+=dis;
+            for(Pair it: adja.get(node)){
+                int v = it.first;
+                int dist = it.second;
+                if(vis[v]!=1){
+                    q.add(new Pair(v,dist));
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        return sum;
+    }
+}
+
+
+
+class Pair{
+    int first,second;
+    Pair(int first,int second){
+        this.first=first;
+        this.second=second;
+    }
+}
