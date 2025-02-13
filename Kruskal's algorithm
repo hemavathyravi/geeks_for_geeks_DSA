@@ -1,0 +1,91 @@
+class Solution {
+    static int spanningTree(int V, int E, List<List<int[]>> adj) {
+        // Code Here.
+        List<Edges> edges = new ArrayList<>();
+        
+        for(int i=0;i<V;i++){
+            for(int[] e:adj.get(i)){
+                int adjnode = e[0];
+                int wt = e[1];
+                if(i<adjnode){
+                    edges.add(new Edges(i,adjnode,wt));
+                }
+                
+            }
+        }
+        
+        Collections.sort(edges);
+        Disjoint ds = new Disjoint(V);
+        int mstWeight = 0;
+        int mstEdges = 0;
+        for(Edges edge: edges){
+            int s= edge.src;
+            int d=edge.dst;
+            int w=edge.weight;
+            if(ds.find(s)!=ds.find(d)){
+                
+                ds.disjointbyUnion(s,d);
+                mstWeight+=w;
+                mstEdges+=1;
+                
+            }
+        }
+        return mstWeight;
+        
+
+    }
+}
+
+class Edges implements Comparable<Edges>
+{
+    int src,dst,weight;
+    Edges(int src,int dst,int weight){
+        this.src = src;
+        this.dst = dst;
+        this.weight = weight;
+    }
+    
+    public int compareTo(Edges other){
+        return this.weight - other.weight;
+    }
+}
+class Disjoint{
+    int[] rank,par;
+    Disjoint(int n){
+        rank = new int[n];
+        par = new int[n];
+        
+        for(int i=0;i<n;i++){
+            par[i]=i;
+            rank[i]=0;
+        }
+    }
+    public int find(int u){
+        if(par[u]==u){
+            return u;
+        }
+        return par[u]=find(par[u]);
+    }
+    public void disjointbyUnion(int u,int v){
+        
+        int upar = find(u);
+        int vpar = find(v);
+        if(upar==vpar){
+            return ;
+        }
+        
+        if(rank[upar]<rank[vpar]){
+            par[vpar]=upar;
+            
+        }
+        else if(rank[upar]>rank[vpar]){
+            par[upar]=vpar;
+        }
+        else{
+            par[upar]=vpar;
+            rank[vpar]++;
+        }
+        
+    }
+    
+}
